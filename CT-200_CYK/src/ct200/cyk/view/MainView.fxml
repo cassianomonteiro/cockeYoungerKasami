@@ -25,7 +25,7 @@
                     <Label text="Gramática" />
                     <TextArea id="grammarTextField" fx:id="grammarTextArea" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS">
                       <tooltip>
-                        <Tooltip text="Escreva a gramática conforme os exemplos:&#10;S -&gt; V&#10;V -&gt; A|B&#10;A -&gt; a&#10;B -&gt; b&#10;&#10;Convenções:&#10;Letra maiúscula: símbolo não-terminal&#10;Letra minúscula: símbolo terminal (caractere)" />
+                        <Tooltip text="Escreva a gramática conforme os exemplos:&#10;S -&gt; V&#10;V -&gt; A|B&#10;A -&gt; a&#10;B -&gt; b&#10;&#10;Convenções:&#10;S: estado inicial&#10;Letra maiúscula: símbolo não-terminal&#10;Letra minúscula: símbolo terminal (caractere)&#10;São considerados somente os símbolos contidos nas gramática descrita." />
                       </tooltip>
                       <VBox.margin>
                         <Insets />
