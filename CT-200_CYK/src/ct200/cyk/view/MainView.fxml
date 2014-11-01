@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ct200.cyk.view.MainViewController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <SplitPane dividerPositions="0.2543859649122807" focusTraversable="true" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="-Infinity" prefHeight="160.0" prefWidth="200.0">
+          <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <Label text="Gramática" />
+                <TextArea id="grammarTextField" fx:id="grammarTextArea" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS">
+                  <tooltip>
+                    <Tooltip text="Escreva a gramática conforme os exemplos:&#10;S -&gt; V&#10;V -&gt; A|B&#10;A -&gt; a&#10;B -&gt; b&#10;&#10;Convenções:&#10;Letra maiúscula: símbolo não-terminal&#10;Letra minúscula: símbolo terminal (caractere)" />
+                  </tooltip>
+                  <VBox.margin>
+                    <Insets />
+                  </VBox.margin>
+                </TextArea>
+              </children>
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x2" />
+              </padding>
+            </VBox>
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="-Infinity" prefHeight="385.0" prefWidth="400.0">
+          <children>
+            <VBox padding="$x2" prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <HBox alignment="CENTER" prefHeight="22.0" prefWidth="200.0">
+                  <children>
+                    <Label text="String de teste">
+                      <HBox.margin>
+                        <Insets right="10.0" fx:id="x1" />
+                      </HBox.margin>
+                    </Label>
+                    <TextField id="testStringTextArea" fx:id="testStringTextField" prefWidth="200.0" promptText="Digite aqui a string de teste" HBox.hgrow="ALWAYS" HBox.margin="$x1" />
+                    <Button mnemonicParsing="false" onMouseClicked="#evaluateClicked" text="Avaliar" />
+                  </children>
+                </HBox>
+                <Separator prefWidth="200.0" />
+                <Label text="Tabela CYK" />
+                <TextArea fx:id="cykTableTextArea" editable="false" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS" />
+              </children>
+            </VBox>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>
