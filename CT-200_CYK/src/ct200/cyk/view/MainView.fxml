@@ -47,6 +47,17 @@
                   </children>
                 </HBox>
                 <Separator prefWidth="200.0" />
+                <HBox prefHeight="22.0" prefWidth="200.0">
+                  <children>
+                    <Label text="Resultado:">
+                      <HBox.margin>
+                        <Insets right="10.0" fx:id="x1" />
+                      </HBox.margin>
+                    </Label>
+                    <Label fx:id="resultLabel" text="" />
+                  </children>
+                </HBox>
+                <Separator prefWidth="200.0" />
                 <Label text="Tabela CYK" />
                 <TextArea fx:id="cykTableTextArea" editable="false" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS" />
               </children>
