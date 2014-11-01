@@ -19,6 +19,7 @@ public class MainApp extends Application {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("view/MainView.fxml"));
 			Scene scene = new Scene(root,800,600);
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Trabalho CT-200 - Implementação do algoritmo CYK");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
