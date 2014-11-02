@@ -17,8 +17,39 @@ public class GrammarParser {
 	 * @return <code><b>true</b></code> se a gramática está pronta para ser avaliada
 	 */
 	public static boolean grammarTextIsCorrect(String grammarText) {
-		// TODO: Verificar aqui se todas as produções estão corretamente formuladas
-		return false;
+		
+		// Evitar erro de string nula
+		if (grammarText == null) {
+			return false;
+		}
+		
+		// Variáveis booleanas de controle
+		boolean allLinesMatchRegex = true;
+		boolean initialProductionFound = false;
+		
+		// Regular expression que encontra produções do tipo A -> Ba
+		String productionRegex = "^[A-Z]\\s*->\\s*[A-Za-z]+$";
+		
+		// Quebrar as linhas da gramática
+		String[] grammarLines = grammarText.split("\n");
+		
+		// Avaliar cada uma das linhas
+		for (int i = 0; i < grammarLines.length; i++) {
+			// Se a linha não é compatível com o regex, parar
+			if (!grammarLines[i].trim().matches(productionRegex)) {
+				allLinesMatchRegex = false;
+				break;
+			}
+			// Procurar a produção do símbolo inicial "S"
+			else if (grammarLines[i].trim().startsWith("S")) {
+				initialProductionFound = true;
+			}
+		}
+
+		// A gramática está correta se:
+		// - todas as linhas são compatíveis com o regex
+		// - a produção inicial S->**** foi encontrada
+		return (allLinesMatchRegex && initialProductionFound);
 	}
 	
 	/**

@@ -47,7 +47,40 @@ public class GrammarParserTest {
 	 */
 	@Test
 	public void testGrammarTextIsCorrect() {
-		fail("Not yet implemented");
+		
+		// String vazia ou nula deve retornar false
+		assertFalse(GrammarParser.grammarTextIsCorrect(null));
+		assertFalse(GrammarParser.grammarTextIsCorrect(""));
+		
+		// Exemplos de produção que devem retornar true
+		assertTrue(GrammarParser.grammarTextIsCorrect("S -> a"));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S-> A"));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S  ->Aa"));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S ->   AA"));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S->a"));
+
+		// Exemplos de produção que devem retornar false
+		assertFalse(GrammarParser.grammarTextIsCorrect("S --> a"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("s -> a"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("s --> A"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("SA --> a"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("AB --> a"));
+		
+		// Múltiplas linhas que devem retornar true
+		assertTrue(GrammarParser.grammarTextIsCorrect("S -> A\nA->a"));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S -> A\nA->a\n"));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S -> A   \nA->a\n   B->b"));
+		
+		// Múltiplas linhas que devem retornar false
+		assertFalse(GrammarParser.grammarTextIsCorrect("S -> A\nA->a\nB"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("S -> A\nA->a\nB-"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("S -> A\nA->a\nB->"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("S -> A\nA->a\na->B"));
+		
+		// Produção inicial não encontrada deve retornar false
+		assertFalse(GrammarParser.grammarTextIsCorrect("A -> B"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("A -> S"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("C -> A\nA->a"));
 	}
 
 	/**

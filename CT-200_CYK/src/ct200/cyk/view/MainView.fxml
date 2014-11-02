@@ -23,7 +23,7 @@
                 <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <children>
                     <Label text="Gramática" />
-                    <TextArea id="grammarTextField" fx:id="grammarTextArea" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS">
+                    <TextArea id="grammarTextField" fx:id="grammarTextArea" onKeyReleased="#grammarTextChanged" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS">
                       <tooltip>
                         <Tooltip text="Escreva a gramática conforme os exemplos:&#10;S -&gt; V&#10;V -&gt; A|B&#10;A -&gt; a&#10;B -&gt; b&#10;&#10;Convenções:&#10;S: estado inicial&#10;Letra maiúscula: símbolo não-terminal&#10;Letra minúscula: símbolo terminal (caractere)&#10;São considerados somente os símbolos contidos nas gramática descrita." />
                       </tooltip>
@@ -46,11 +46,11 @@
                       <children>
                         <Label text="String de teste">
                           <HBox.margin>
-                            <Insets right="10.0" fx:id="x1" />
+                            <Insets right="10.0" />
                           </HBox.margin>
                         </Label>
-                        <TextField id="testStringTextArea" fx:id="testStringTextField" prefWidth="200.0" promptText="Digite aqui a string de teste" HBox.hgrow="ALWAYS" HBox.margin="$x1" />
-                        <Button mnemonicParsing="false" onMouseClicked="#evaluateClicked" text="Avaliar" />
+                        <TextField id="testStringTextArea" fx:id="testStringTextField" prefWidth="200.0" promptText="Digite aqui a string de teste" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="evaluateButton" mnemonicParsing="false" onMouseClicked="#evaluateClicked" text="Avaliar" />
                       </children>
                     </HBox>
                     <Separator prefWidth="200.0" />
@@ -58,7 +58,7 @@
                       <children>
                         <Label text="Resultado:">
                           <HBox.margin>
-                            <Insets right="10.0" fx:id="x1" />
+                            <Insets right="10.0" />
                           </HBox.margin>
                         </Label>
                         <Label fx:id="resultLabel" text="" />
