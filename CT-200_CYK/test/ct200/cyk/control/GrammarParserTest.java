@@ -1,12 +1,17 @@
 package ct200.cyk.control;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import ct200.cyk.model.Grammar;
 
 /**
  * @author cassiano
@@ -93,7 +98,46 @@ public class GrammarParserTest {
 	 */
 	@Test
 	public void testParsedGrammarFromText() {
-		fail("Not yet implemented");
+		
+		Grammar grammar = new Grammar();
+
+		// Gramática incorreta deve retornar null
+		grammar = GrammarParser.parsedGrammarFromText("");
+		assertNull(grammar);
+		
+		// Gramática de uma produção única
+		grammar = GrammarParser.parsedGrammarFromText("S -> a");
+		assertEquals(1, grammar.getProductions().size());
+		assertEquals("S", grammar.getProductions().get(0).getHead());
+		assertEquals("a", grammar.getProductions().get(0).getBody());
+
+		// Gramática de uma produção múltipla
+		grammar = GrammarParser.parsedGrammarFromText("S -> Aa | a");
+		assertEquals(2, grammar.getProductions().size());
+		assertEquals("S", grammar.getProductions().get(0).getHead());
+		assertEquals("Aa", grammar.getProductions().get(0).getBody());
+		assertEquals("S", grammar.getProductions().get(1).getHead());
+		assertEquals("a", grammar.getProductions().get(1).getBody());
+
+		// Gramática de várias produções únicas
+		grammar = GrammarParser.parsedGrammarFromText("S -> Aa\n A->a");
+		assertEquals(2, grammar.getProductions().size());
+		assertEquals("S", grammar.getProductions().get(0).getHead());
+		assertEquals("Aa", grammar.getProductions().get(0).getBody());
+		assertEquals("A", grammar.getProductions().get(1).getHead());
+		assertEquals("a", grammar.getProductions().get(1).getBody());
+
+		// Gramática de várias produções múltiplas
+		grammar = GrammarParser.parsedGrammarFromText("S -> Aa|A \n A-> Aa | a");
+		assertEquals(4, grammar.getProductions().size());
+		assertEquals("S", grammar.getProductions().get(0).getHead());
+		assertEquals("Aa", grammar.getProductions().get(0).getBody());
+		assertEquals("S", grammar.getProductions().get(1).getHead());
+		assertEquals("A", grammar.getProductions().get(1).getBody());
+		assertEquals("A", grammar.getProductions().get(2).getHead());
+		assertEquals("Aa", grammar.getProductions().get(2).getBody());
+		assertEquals("A", grammar.getProductions().get(3).getHead());
+		assertEquals("a", grammar.getProductions().get(3).getBody());
 	}
 
 }

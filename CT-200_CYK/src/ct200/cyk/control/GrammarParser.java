@@ -1,6 +1,7 @@
 package ct200.cyk.control;
 
 import ct200.cyk.model.Grammar;
+import ct200.cyk.model.Production;
 
 /**
  * Classe de funções para interpretar as entradas do usuário e criar objetos
@@ -59,8 +60,35 @@ public class GrammarParser {
 	 * @return objeto {@link Grammar} preenchido com produções unitárias
 	 */
 	public static Grammar parsedGrammarFromText(String grammarText) {
-		// TODO: Criar aqui o objeto grammar com a lista de produções a partir do texto
-		return null;
+		
+		// Evitar gramática incorreta
+		if (!grammarTextIsCorrect(grammarText)) {
+			return null;
+		}
+		
+		// Quebrar as linhas da gramática
+		String[] productionTexts = grammarText.split("\n");
+		Grammar grammar = new Grammar();
+		
+		// Interpretar cada uma das linhas
+		for (int i = 0; i < productionTexts.length; i++) {
+
+			// Separar cabeça e corpo
+			String[] productionComponents = productionTexts[i].trim().split("->");
+			String head = productionComponents[0].trim();
+			
+			// Separar múltiplos componentes do corpo
+			String[] bodyComponents = productionComponents[1].trim().split("\\|");
+			
+			// Criar as produções para cada corpo
+			for (int j = 0; j < bodyComponents.length; j++) {
+				String body = bodyComponents[j].trim();
+				grammar.addProduction(new Production(head, body));
+			}
+			
+		}
+		
+		return grammar;
 	}
 
 }

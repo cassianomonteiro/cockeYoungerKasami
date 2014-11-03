@@ -3,6 +3,7 @@ package ct200.cyk.view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -89,11 +90,20 @@ public class MainViewController {
 
     	// Initialize your logic here: all @FXML variables will have been injected
 
+    	// Botão "Avaliar" é desabilitado na inicialização
+    	evaluateButton.setDisable(true);
+
     	// A área para digitar a gramática é inicializada com texto vermelho (incorreta)
 		grammarTextArea.setStyle("-fx-text-fill: red;");
 		
-    	// Botão "Avaliar" é desabilitado na inicialização
-    	evaluateButton.setDisable(true);
+		// Iniciar com foco na área para digitar a gramática
+    	Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+		    	grammarTextArea.requestFocus();
+			}
+		});
+    	
     }
 
 }
