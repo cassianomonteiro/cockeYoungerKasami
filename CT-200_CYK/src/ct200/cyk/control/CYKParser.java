@@ -65,7 +65,7 @@ public class CYKParser {
 	/**
 	 * Método para retornar a tabela CYK utilizada para avaliar a string em teste
 	 * @param testString
-	 * @return a tabela CYK em formato String[][]
+	 * @return a tabela CYK em formato String[linha][coluna]
 	 */
 	public String[][] cykTableForString(String testString) {
 		// TODO Executar o método performEvaluationForString caso esta string
