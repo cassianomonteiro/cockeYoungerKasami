@@ -71,7 +71,14 @@ public class CYKParser {
 		// TODO Executar o método performEvaluationForString caso esta string
 		// ainda não tenha sido avaliada
 		// Retornar o valor da variável lastTestedStringCYKTable
-		return null;
+
+    	
+		String[][] cykTable = {{"{B}", "{A,C}", "{A,C}", "{B}", "{A,C}"},
+								{"{S,A}", "{B}", "{S,C}", "{S,A}", ""},
+								{"-", "{B}", "{B}", "", ""},
+								{"-", "{S,A,C}", "", "", ""},
+								{"{S,A,C}", "", "", "", ""}};
+		return cykTable;
 	}
 
 }

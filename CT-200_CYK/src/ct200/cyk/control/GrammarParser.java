@@ -28,7 +28,7 @@ public class GrammarParser {
 		boolean allLinesMatchRegex = true;
 		boolean initialProductionFound = false;
 		
-		// Regular expression que encontra produções do tipo A -> Ba
+		// Regular expression que encontra produções do tipo A -> Ba|a
 		String productionRegex = "^[A-Z]\\s*->\\s*[A-Za-z]+(\\s*\\|\\s*[A-Za-z])*$";
 		
 		// Quebrar as linhas da gramática

@@ -14,7 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import ct200.cyk.control.CYKParser;
 import ct200.cyk.control.GrammarParser;
+import ct200.cyk.control.OutputFormatter;
 
 /**
  * Sample Skeleton for "MainView.fxml" Controller Class
@@ -45,24 +47,30 @@ public class MainViewController {
     @FXML // fx:id="testStringTextField"
     private TextField testStringTextField; // Value injected by FXMLLoader
 
-    // Handler for Button[Button[id=null, styleClass=button]] onMouseClicked
+    // Handler for Button[Button[id="evaluateButton", styleClass=button]] onMouseClicked
     @FXML
     void evaluateClicked(MouseEvent event) {
         // handle the event here
+
+    	// Inicializar o CYKParser
+    	CYKParser cykParser = new CYKParser(GrammarParser.parsedGrammarFromText(grammarTextArea.getText()));
+    	String testString = testStringTextField.getText();
     	
-    	Font boldFont = Font.font(
-    			resultLabel.getFont().getFamily(), 
-    			FontWeight.BOLD, 
-    			resultLabel.getFont().getSize());
+    	// Verificar se a string pertence à linguagem executando o parser
+    	if (cykParser.stringBelongsToLanguage(testString)) {
+    		resultLabel.setText("String pertence à linguagem.");
+    		resultLabel.setTextFill(Color.GREEN);
+    	}
+    	else {
+    		resultLabel.setText("String não pertence à linguagem.");
+    		resultLabel.setTextFill(Color.RED);
+    	}
     	
-    	resultLabel.setText("Não pertence à linguagem.");
-    	resultLabel.setFont(boldFont);
-    	resultLabel.setTextFill(Color.RED);
-    	
-    	cykTableTextArea.setText(
-    			"It works!\n" +
-    			"Grammar: " + grammarTextArea.getText() + "\n" +
-    			"Test String: " + testStringTextField.getText());
+    	// FIXME: retirar esta string dummy
+		testString = "baaba";
+		
+		// Preencher a tabela CYK
+		cykTableTextArea.setText(OutputFormatter.formattedCYKOutput(cykParser.cykTableForString(testString), testString));
     }
 
     @FXML
@@ -93,8 +101,22 @@ public class MainViewController {
     	// Botão "Avaliar" é desabilitado na inicialização
     	evaluateButton.setDisable(true);
 
+    	// Mudar a fonte das caixas de texto
+    	Font codeFont = Font.font(
+    			"Courier New", 
+    			FontWeight.BOLD, 
+    			13);
+		grammarTextArea.setFont(codeFont);
+		cykTableTextArea.setFont(codeFont);
+    	
     	// A área para digitar a gramática é inicializada com texto vermelho (incorreta)
 		grammarTextArea.setStyle("-fx-text-fill: red;");
+		
+		// Deixar o label de resultado em negrito
+    	resultLabel.setFont(Font.font(
+    			resultLabel.getFont().getFamily(), 
+    			FontWeight.BOLD, 
+    			resultLabel.getFont().getSize()));
 		
 		// Iniciar com foco na área para digitar a gramática
     	Platform.runLater(new Runnable() {
