@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -22,6 +23,31 @@
               <children>
                 <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <children>
+                    <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="NEVER">
+                      <children>
+                        <Label text="Exemplos" />
+                        <ComboBox fx:id="comboExamples" maxHeight="-Infinity" minHeight="-Infinity" onAction="#comboExampleChanged" prefHeight="26.0" prefWidth="110.0" promptText="" HBox.hgrow="ALWAYS">
+                          <items>
+                            <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Item 1" />
+                              <String fx:value="Item 2" />
+                              <String fx:value="Item 3" />
+                            </FXCollections>
+                          </items>
+                        </ComboBox>
+                      </children>
+                      <padding>
+                        <Insets bottom="10.0" />
+                      </padding>
+                      <VBox.margin>
+                        <Insets />
+                      </VBox.margin>
+                    </HBox>
+                    <Separator prefWidth="200.0">
+                      <VBox.margin>
+                        <Insets bottom="5.0" />
+                      </VBox.margin>
+                    </Separator>
                     <Label text="Gramática" />
                     <TextArea id="grammarTextField" fx:id="grammarTextArea" onKeyReleased="#grammarTextChanged" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS">
                       <tooltip>

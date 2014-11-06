@@ -4,8 +4,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -15,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import ct200.cyk.control.CYKParser;
+import ct200.cyk.control.ExamplesFactory;
 import ct200.cyk.control.GrammarParser;
 import ct200.cyk.control.OutputFormatter;
 
@@ -32,6 +37,9 @@ public class MainViewController {
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
 
+    @FXML // fx:id="comboExamples"
+    private ComboBox<?> comboExamples; // Value injected by FXMLLoader
+
     @FXML // fx:id="cykTableTextArea"
     private TextArea cykTableTextArea; // Value injected by FXMLLoader
 
@@ -46,6 +54,16 @@ public class MainViewController {
 
     @FXML // fx:id="testStringTextField"
     private TextField testStringTextField; // Value injected by FXMLLoader
+
+    // Handler for ComboBox[fx:id="comboExamples"] onAction
+    @FXML
+    void comboExampleChanged(ActionEvent event) {
+        // handle the event here
+    	
+    	// Inserir o exemplo na área de texto da gramática
+    	grammarTextArea.setText(ExamplesFactory.getExample((String) comboExamples.getValue()));
+    	grammarTextChanged(null);
+    }
 
     // Handler for Button[Button[id="evaluateButton", styleClass=button]] onMouseClicked
     @FXML
@@ -87,9 +105,11 @@ public class MainViewController {
     		evaluateButton.setDisable(true);
     	}
     }
-
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    // Ignorados estes warning por causa de algum bug do eclipse
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() { 
+        assert comboExamples != null : "fx:id=\"comboExamples\" was not injected: check your FXML file 'MainView.fxml'.";
     	assert cykTableTextArea != null : "fx:id=\"cykTableTextArea\" was not injected: check your FXML file 'MainView.fxml'.";
     	assert evaluateButton != null : "fx:id=\"evaluateButton\" was not injected: check your FXML file 'MainView.fxml'.";
     	assert grammarTextArea != null : "fx:id=\"grammarTextArea\" was not injected: check your FXML file 'MainView.fxml'.";
@@ -97,6 +117,11 @@ public class MainViewController {
     	assert testStringTextField != null : "fx:id=\"testStringTextField\" was not injected: check your FXML file 'MainView.fxml'.";
 
     	// Initialize your logic here: all @FXML variables will have been injected
+
+    	// Popular combo de exemplos
+		ObservableList obList = FXCollections.observableArrayList(ExamplesFactory.getExamplesList());
+    	comboExamples.getItems().clear();
+    	comboExamples.setItems(obList);
 
     	// Botão "Avaliar" é desabilitado na inicialização
     	evaluateButton.setDisable(true);

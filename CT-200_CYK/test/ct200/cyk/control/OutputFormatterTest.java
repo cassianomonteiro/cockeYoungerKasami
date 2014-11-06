@@ -95,7 +95,6 @@ public class OutputFormatterTest {
 						 " b | c ";
 		assertEquals(expectedOutput, OutputFormatter.formattedCYKOutput(cykTable5, testString));
 
-
 		// Tabela CYK do requisito do trabalho
 		String[][] cykTable6 = {{"{B}", "{A,C}", "{A,C}", "{B}", "{A,C}"},
 								{"{S,A}", "{B}", "{S,C}", "{S,A}", ""},
