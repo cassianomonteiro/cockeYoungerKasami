@@ -13,7 +13,8 @@ public class GrammarParser {
 	
 	/**
 	 * Este método verifica se o texto de entrada da gramática está completo
-	 * para que o algoritmo CYK possa ser executado corretamente.
+	 * e na Forma Normal de Chomsky para que o algoritmo CYK possa 
+	 * ser executado corretamente.
 	 * @param grammarText
 	 * @return <code><b>true</b></code> se a gramática está pronta para ser avaliada
 	 */
@@ -28,8 +29,11 @@ public class GrammarParser {
 		boolean allLinesMatchRegex = true;
 		boolean initialProductionFound = false;
 		
-		// Regular expression que encontra produções do tipo A -> Ba|a
-		String productionRegex = "^[A-Z]\\s*->\\s*[A-Za-z]+(\\s*\\|\\s*[A-Za-z])*$";
+		// Regular expression que encontra produções do tipo A -> BA|a
+		String productionRegex = "^[A-Z]" + 							// Cabeça
+								 "\\s*->\\s*" + 						// Símbolo de produção com quaisquer espaços 
+								 "([A-Z]{1,2}|[a-z])" + 				// Produções do tipo AA ou a
+								 "(\\s*\\|\\s*([A-Z]{1,2}|[a-z]))*$"; 	// Múltiplas produções
 		
 		// Quebrar as linhas da gramática
 		String[] grammarLines = grammarText.split("\n");

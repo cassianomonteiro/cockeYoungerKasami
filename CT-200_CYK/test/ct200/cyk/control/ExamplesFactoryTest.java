@@ -72,4 +72,17 @@ public class ExamplesFactoryTest {
 		}
 	}
 
+	/**
+	 * Test method for {@link ct200.cyk.control.ExamplesFactory#getTestString(String)}.
+	 */
+	@Test
+	public void testGetTestString() {
+		List<String> examples = ExamplesFactory.getExamplesList();
+
+		// Todos os exemplos devem estar com a gramática correta
+		for (String example : examples) {
+			assertTrue(ExamplesFactory.getTestString(example).length() > 0);
+		}
+	}
+
 }

@@ -57,18 +57,18 @@ public class GrammarParserTest {
 		assertFalse(GrammarParser.grammarTextIsCorrect(null));
 		assertFalse(GrammarParser.grammarTextIsCorrect(""));
 		
-		// Exemplos de produção que devem retornar true
+		// Exemplos de produção que devem retornar true (FNC)
 		assertTrue(GrammarParser.grammarTextIsCorrect("S -> a"));
 		assertTrue(GrammarParser.grammarTextIsCorrect("S-> A"));
-		assertTrue(GrammarParser.grammarTextIsCorrect("S  ->Aa"));
 		assertTrue(GrammarParser.grammarTextIsCorrect("S ->   AA"));
-		assertTrue(GrammarParser.grammarTextIsCorrect("S->a"));
-		assertTrue(GrammarParser.grammarTextIsCorrect("S-> A|a"));
-		assertTrue(GrammarParser.grammarTextIsCorrect("S-> A |a"));
-		assertTrue(GrammarParser.grammarTextIsCorrect("S-> A|  a  "));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S->AA"));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S-> AA|a"));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S-> AA |a"));
+		assertTrue(GrammarParser.grammarTextIsCorrect("S-> AA|  a  "));
 
 		// Exemplos de produção que devem retornar false
 		assertFalse(GrammarParser.grammarTextIsCorrect("S --> a"));
+		assertFalse(GrammarParser.grammarTextIsCorrect("S  ->Aa"));
 		assertFalse(GrammarParser.grammarTextIsCorrect("s -> a"));
 		assertFalse(GrammarParser.grammarTextIsCorrect("s -> A"));
 		assertFalse(GrammarParser.grammarTextIsCorrect("SA -> a"));
@@ -112,30 +112,30 @@ public class GrammarParserTest {
 		assertEquals("a", grammar.getProductions().get(0).getBody());
 
 		// Gramática de uma produção múltipla
-		grammar = GrammarParser.parsedGrammarFromText("S -> Aa | a");
+		grammar = GrammarParser.parsedGrammarFromText("S -> AA | a");
 		assertEquals(2, grammar.getProductions().size());
 		assertEquals("S", grammar.getProductions().get(0).getHead());
-		assertEquals("Aa", grammar.getProductions().get(0).getBody());
+		assertEquals("AA", grammar.getProductions().get(0).getBody());
 		assertEquals("S", grammar.getProductions().get(1).getHead());
 		assertEquals("a", grammar.getProductions().get(1).getBody());
 
 		// Gramática de várias produções únicas
-		grammar = GrammarParser.parsedGrammarFromText("S -> Aa\n A->a");
+		grammar = GrammarParser.parsedGrammarFromText("S -> AA\n A->a");
 		assertEquals(2, grammar.getProductions().size());
 		assertEquals("S", grammar.getProductions().get(0).getHead());
-		assertEquals("Aa", grammar.getProductions().get(0).getBody());
+		assertEquals("AA", grammar.getProductions().get(0).getBody());
 		assertEquals("A", grammar.getProductions().get(1).getHead());
 		assertEquals("a", grammar.getProductions().get(1).getBody());
 
 		// Gramática de várias produções múltiplas
-		grammar = GrammarParser.parsedGrammarFromText("S -> Aa|A \n A-> Aa | a");
+		grammar = GrammarParser.parsedGrammarFromText("S -> AA|A \n A-> AA | a");
 		assertEquals(4, grammar.getProductions().size());
 		assertEquals("S", grammar.getProductions().get(0).getHead());
-		assertEquals("Aa", grammar.getProductions().get(0).getBody());
+		assertEquals("AA", grammar.getProductions().get(0).getBody());
 		assertEquals("S", grammar.getProductions().get(1).getHead());
 		assertEquals("A", grammar.getProductions().get(1).getBody());
 		assertEquals("A", grammar.getProductions().get(2).getHead());
-		assertEquals("Aa", grammar.getProductions().get(2).getBody());
+		assertEquals("AA", grammar.getProductions().get(2).getBody());
 		assertEquals("A", grammar.getProductions().get(3).getHead());
 		assertEquals("a", grammar.getProductions().get(3).getBody());
 	}

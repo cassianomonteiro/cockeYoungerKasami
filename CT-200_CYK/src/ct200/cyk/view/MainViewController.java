@@ -60,8 +60,15 @@ public class MainViewController {
     void comboExampleChanged(ActionEvent event) {
         // handle the event here
     	
-    	// Inserir o exemplo na área de texto da gramática
-    	grammarTextArea.setText(ExamplesFactory.getExample((String) comboExamples.getValue()));
+    	String selectedExample = (String) comboExamples.getValue();
+    	
+    	// Inserir a gramática de exemplo na área de texto da gramática
+    	grammarTextArea.setText(ExamplesFactory.getExample(selectedExample));
+    	
+    	// Inserir a string de teste de exemplo
+    	testStringTextField.setText(ExamplesFactory.getTestString(selectedExample));
+    	
+    	// Executar handler
     	grammarTextChanged(null);
     }
 
@@ -91,20 +98,36 @@ public class MainViewController {
 		cykTableTextArea.setText(OutputFormatter.formattedCYKOutput(cykParser.cykTableForString(testString), testString));
     }
 
+    // Handler for TextField[fx:id="grammarTextArea"] onKeyReleased
     @FXML
     void grammarTextChanged(KeyEvent event) {
+    	
+    	boolean grammarTextisCorrect = GrammarParser.grammarTextIsCorrect(grammarTextArea.getText());
+    	
     	// Quando algo é digitado na gramática, ela deve ficar vermelha
     	// enquanto não estiver correta
-    	// O botão "Avaliar" só fica habilitado quando a gramática está correta
-    	if (GrammarParser.grammarTextIsCorrect(grammarTextArea.getText())) {
+    	if (grammarTextisCorrect) {
     		grammarTextArea.setStyle("-fx-text-fill: black;");
-    		evaluateButton.setDisable(false);
     	}
     	else {
     		grammarTextArea.setStyle("-fx-text-fill: red;");
-    		evaluateButton.setDisable(true);
     	}
+
+    	// O botão "Avaliar" só fica desabilitado quando a gramática está incorreta
+    	// ou quando a string de teste ainda não foi preenchida
+		evaluateButton.setDisable(!grammarTextisCorrect || testStringTextField.getText().length() == 0);
     }
+
+    // Handler for TextField[fx:id="testStringTextField"] onKeyReleased
+    @FXML
+    void testStringChanged(KeyEvent event) {
+    	boolean grammarTextisCorrect = GrammarParser.grammarTextIsCorrect(grammarTextArea.getText());
+    	
+    	// O botão "Avaliar" só fica desabilitado quando a gramática está incorreta
+    	// ou quando a string de teste ainda não foi preenchida
+		evaluateButton.setDisable(!grammarTextisCorrect || testStringTextField.getText().length() == 0);
+    }
+
     // Ignorados estes warning por causa de algum bug do eclipse
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@FXML // This method is called by the FXMLLoader when initialization is complete
