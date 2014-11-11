@@ -89,13 +89,30 @@ public class ExamplesFactory {
 										 		   "G->g\n" +
 												   "H->h\n");
 			
-			examplesMap.put("Exemplo 3", "S->C");
+			examplesMap.put("Exemplo Laboratório", "S->AB|BC\n" +
+												   "A->BA|a\n" +
+												   "B->CC|b\n" +
+												   "C->AB|a\n");
+			// Source:
+			// https://www.youtube.com/watch?v=q0HAqPeqwvs
+			examplesMap.put("Exemplo YouTube", "S->AX|a|YB\n" +
+			                                   "X->AX|a|YB\n" +
+											   "Y->BY|b\n" +
+			                                   "A->a\n" +
+											   "B->b\n");
+			// Source:
+			// http://courses.cs.washington.edu/courses/cse322/09sp/lec14.pdf
+			examplesMap.put("Exemplo Washington University", "S->XW|SY|XS\n" +
+			                             					 "X->AU|a|AS\n" +
+															 "Y->SZ|BB|AU|a|AS\n" +
+								                             "W->SY\n" +
+															 "U->XS\n" +
+								                             "Z->BS\n" +
+								                             "A->a\n" +
+															 "B->b\n");
 			
-			examplesMap.put("Exemplo 4", "S->D");
-			
-			examplesMap.put("Exemplo 5", "S->E");
-			
-			examplesMap.put("Exemplo 6", "S->F");
+			examplesMap.put("Exemplo Trivial", "S->AS|a\n" +
+											   "A->SA|b");
 		}
 	}
 
@@ -107,10 +124,10 @@ public class ExamplesFactory {
 		if (testStringsMap.size() == 0) {
 			testStringsMap.put("Exemplo Aula 10", "abb");
 			testStringsMap.put("Exemplo Exercício 5", "aeafa");
-			testStringsMap.put("Exemplo 3", "abb");
-			testStringsMap.put("Exemplo 4", "abb");
-			testStringsMap.put("Exemplo 5", "abb");
-			testStringsMap.put("Exemplo 6", "abb");
+			testStringsMap.put("Exemplo Laboratório", "baaba");
+			testStringsMap.put("Exemplo YouTube", "aaabbb");
+			testStringsMap.put("Exemplo Washington University", "aaabb");
+			testStringsMap.put("Exemplo Trivial", "abba");
 		}
 	}
 
