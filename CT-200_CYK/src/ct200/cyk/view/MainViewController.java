@@ -90,9 +90,6 @@ public class MainViewController {
     		resultLabel.setText("String não pertence à linguagem.");
     		resultLabel.setTextFill(Color.RED);
     	}
-    	
-    	// FIXME: retirar esta string dummy
-		testString = "baaba";
 		
 		// Preencher a tabela CYK
 		cykTableTextArea.setText(OutputFormatter.formattedCYKOutput(cykParser.cykTableForString(testString), testString));
