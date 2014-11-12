@@ -19,6 +19,11 @@ public class OutputFormatter {
 	public static String formattedCYKOutput(String[][] cykTable, String testString) {
 		String cykOutput = "";
 		
+		// Evitar erro de tabela vazia
+		if (cykTable == null) {
+			return cykOutput;
+		}
+		
 		// Obter tamanhos de cada coluna
 		int columnSizes[] = new int[cykTable[0].length];
 		

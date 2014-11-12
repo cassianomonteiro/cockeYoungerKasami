@@ -96,7 +96,7 @@
                     </HBox>
                     <Separator prefWidth="200.0" />
                     <Label text="Tabela CYK" />
-                    <TextArea fx:id="cykTableTextArea" editable="false" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS" />
+                    <TextArea fx:id="cykTableTextArea" editable="false" prefWidth="200.0" wrapText="false" VBox.vgrow="ALWAYS" />
                   </children>
                 </VBox>
               </children>

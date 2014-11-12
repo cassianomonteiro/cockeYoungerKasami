@@ -49,15 +49,15 @@ public class CYKParser {
 	 * @param testString
 	 */
 	protected void performEvaluationForString(String testString) {
-		// TODO Implementar algoritmo CYK aqui, preenchendo as variáveis
-		// lastTestedString e lastTestedStringBelongsToLanguage
 		
 		int strLenght = testString.length();
 		List<Production> grammarProductionL = grammar.getProductions();
 		
 		if( strLenght == 0 )
 		{
-			// TODO test for empty string;
+			lastTestedString = testString;
+			lastTestedStringBelongsToLanguage = false;
+			lastTestedStringCYKTable = null;
 			return;
 		}
 		
@@ -155,41 +155,30 @@ public class CYKParser {
 			}
 		}
 		
-		for( int i = 0; i < strLenght; ++i )
-		{
-			for( int j = 0; j < strLenght - i; ++j )
-			{
+		// Construção da tabela para impressão
+		for (int i = 0; i < strLenght; ++i) {
+			for(int j = 0; j < strLenght - i; ++j) {
 				ArrayList<Production> prodList = cykMatrix.get( i ).get( j );
 
-				if( prodList.size() > 1 )
-				{
-					System.out.print( "{ " + prodList.get( 0 ).getHead() );
+				if (prodList.size() > 1) {
 					lastTestedStringCYKTable[i][j] = "{" + prodList.get( 0 ).getHead();
-
-					for( int k = 1; k < prodList.size(); ++k ) {
-						System.out.print( "," + prodList.get( k ).getHead() );
+					for (int k = 1; k < prodList.size(); ++k) {
 						lastTestedStringCYKTable[i][j] += "," + prodList.get( k ).getHead();
 					}
-					
-					System.out.print( " } " ); 
 					lastTestedStringCYKTable[i][j] += "}";
 				}
-				else if( prodList.size() == 1 ) {
-					System.out.print( "{ " + prodList.get( 0 ).getHead() + " } " );
-
+				else if (prodList.size() == 1) {
 					lastTestedStringCYKTable[i][j] = "{" +  prodList.get( 0 ).getHead() + "} ";
 				}
 				else {
-					System.out.print( "{} " );
 					lastTestedStringCYKTable[i][j] = "{}";
 				}
 			}
-			
-			System.out.println();
 		}
 		
-		// TODO: Verificar se é isto mesmo. A string pertence à linguagem se a última iteração for diferente de {}?
-		lastTestedStringBelongsToLanguage = !lastTestedStringCYKTable[strLenght-1][0].equals("{}");
+		// A string pertence à linguagem se a última iteração possui a
+		// cabeça de produção inicial
+		lastTestedStringBelongsToLanguage = lastTestedStringCYKTable[strLenght-1][0].contains("S");
 		
 		lastTestedString = testString;
 	}
