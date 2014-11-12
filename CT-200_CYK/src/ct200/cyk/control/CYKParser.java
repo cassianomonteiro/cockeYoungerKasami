@@ -1,6 +1,10 @@
 package ct200.cyk.control;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ct200.cyk.model.Grammar;
+import ct200.cyk.model.Production;
 
 /**
  * Esta classe contém o algoritmo CYK.
@@ -47,6 +51,127 @@ public class CYKParser {
 	protected void performEvaluationForString(String testString) {
 		// TODO Implementar algoritmo CYK aqui, preenchendo as variáveis
 		// lastTestedString e lastTestedStringBelongsToLanguage
+		
+		int strLenght = testString.length();
+		List<Production> grammarProductionL = grammar.getProductions();
+		
+		if( strLenght == 0 )
+		{
+			// TODO test for empty string;
+			return;
+		}
+		
+		ArrayList< ArrayList< ArrayList<Production> > > cykMatrix = 
+				new ArrayList< ArrayList< ArrayList<Production> > >();
+
+		for( int i = 0; i < strLenght; ++i )
+		{
+			ArrayList< ArrayList<Production> > lineList = 
+					new ArrayList<ArrayList<Production>>();
+			cykMatrix.add( lineList );
+
+			for( int j = 0; j < strLenght - i; ++j )
+				lineList.add( new ArrayList<Production>() );
+		}		
+
+		/// base
+		for( int i = 0; i < strLenght; i++ )
+		{
+			char strSymbol = testString.charAt( i );
+			
+			for( Production prod : grammarProductionL )
+			{
+				if( prod.getBody().contains( String.valueOf( strSymbol ) ) )
+					cykMatrix.get( 0 ).get( i ).add( prod );
+			}
+		}
+		
+		/// inducao
+		for( int i = 1; i < strLenght; ++i )
+		{
+			for( int j = 0; j < strLenght - i; ++j )
+			{
+				int leftI = i-1;
+				/// leftJ é o proprio valor de j na iteração
+
+				int rightI = 0;
+				int rightJ = i+j;
+				
+				ArrayList<Production> cykCell = cykMatrix.get( i ).get( j );
+				
+				while( leftI >= 0 )
+				{
+					// seja o produto cartesiano { A,B } x { C, D } = {AC,AD, BC,BD }
+					// onde:
+					//  - o lado direito representa cabeças de produção
+					//  - o lado esquerdo representa as possíveis produções das novas cabeças
+					//  nas linhas superiores da matriz triangular
+					//
+					// leftList corresponde ao grupo mais a esquerda do produto
+					// rightList corresponde ao grupo mais a direita do produto
+					
+					ArrayList<Production> leftList = cykMatrix.get( leftI ).get( j );
+					ArrayList<Production> rightList = cykMatrix.get( rightI ).get( rightJ );
+					
+					for( Production leftProd : leftList )
+					{
+						String strLeft = leftProd.getHead();
+						
+						for( Production rightProd : rightList )
+						{
+							String prod = strLeft + rightProd.getHead();
+							
+							for( Production candidateProduction : grammarProductionL )
+							{
+								if( candidateProduction.getBody().matches( prod )  )
+								{
+									boolean match = false;
+									
+									for( Production p: cykCell )
+									{
+										if( p.getHead().matches( candidateProduction.getHead() ) )
+										{
+											match = true;
+											break;
+										}
+									}
+									
+									if( match == false ) cykCell.add( candidateProduction );
+								}
+							}
+						}
+					}
+
+					++rightI; --rightJ; --leftI;
+				}
+			}
+		}
+		
+		for( int i = 0; i < strLenght; ++i )
+		{
+			for( int j = 0; j < strLenght - i; ++j )
+			{
+				ArrayList<Production> prodList = cykMatrix.get( i ).get( j );
+
+				if( prodList.size() > 1 )
+				{
+					System.out.print( "{ " + prodList.get( 0 ).getHead() );
+
+					for( int k = 1; k < prodList.size(); ++k )
+						System.out.print( "," + prodList.get( k ).getHead() );
+					
+					System.out.print( " } " ); 
+				}
+				else if( prodList.size() == 1 )
+					System.out.print( "{ " + prodList.get( 0 ).getHead() + " } " );
+				else
+					System.out.print( "{} " );
+			}
+			
+			System.out.println();
+		}
+		
+		lastTestedString = testString;
 	}
 	
 	/**
@@ -58,8 +183,11 @@ public class CYKParser {
 		// TODO Executar o método performEvaluationForString caso esta string
 		// ainda não tenha sido avaliada
 		// Retornar o valor da variável lastTestedStringBelongsToLanguage
-		
-		return false;
+
+		if( lastTestedString != testString )
+			performEvaluationForString( testString );
+
+		return lastTestedStringBelongsToLanguage;
 	}
 	
 	/**

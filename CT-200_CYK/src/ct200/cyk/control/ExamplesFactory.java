@@ -96,6 +96,11 @@ public class ExamplesFactory {
 			examplesMap.put("Exemplo 5", "S->E");
 			
 			examplesMap.put("Exemplo 6", "S->F");
+			
+			examplesMap.put("Exemplo 0", "S->AB|BC\n" +
+										 "A->BA|a\n" +
+									     "B->CC|b\n" +
+										 "C->AB|a\n" );
 		}
 	}
 
@@ -105,6 +110,7 @@ public class ExamplesFactory {
 	private static void createTestStringsMap() {
 		
 		if (testStringsMap.size() == 0) {
+			testStringsMap.put( "Exemplo 0", "baaba" );
 			testStringsMap.put("Exemplo Aula 10", "abb");
 			testStringsMap.put("Exemplo Exercício 5", "aeafa");
 			testStringsMap.put("Exemplo 3", "abb");
