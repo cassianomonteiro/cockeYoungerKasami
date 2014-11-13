@@ -113,6 +113,10 @@ public class MainViewController {
     	// O botão "Avaliar" só fica desabilitado quando a gramática está incorreta
     	// ou quando a string de teste ainda não foi preenchida
 		evaluateButton.setDisable(!grammarTextisCorrect || testStringTextField.getText().length() == 0);
+		
+		// Limpar resultados
+		cykTableTextArea.clear();
+		resultLabel.setText("");
     }
 
     // Handler for TextField[fx:id="testStringTextField"] onKeyReleased
@@ -123,6 +127,10 @@ public class MainViewController {
     	// O botão "Avaliar" só fica desabilitado quando a gramática está incorreta
     	// ou quando a string de teste ainda não foi preenchida
 		evaluateButton.setDisable(!grammarTextisCorrect || testStringTextField.getText().length() == 0);
+
+		// Limpar resultados
+		cykTableTextArea.clear();
+		resultLabel.setText("");
     }
 
     // Ignorados estes warning por causa de algum bug do eclipse
