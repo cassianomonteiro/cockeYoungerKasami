@@ -65,8 +65,8 @@ public class ExamplesFactory {
 		if (examplesMap.size() == 0) {
 			
 			examplesMap.put("Exemplo Aula 10", "S->XZ|XB\n" + 
-										 	   "X->AW|AX|A\n" +
-										 	   "Y->ST|SB|BS|BB|AW|AX|A\n" +
+										 	   "X->AW|AX|AB\n" +
+										 	   "Y->ST|SB|BS|BB|AW|AX|AA\n" +
 										 	   "Z->SY\n" +
 										 	   "W->XS\n" +
 										 	   "T->YS\n" +
