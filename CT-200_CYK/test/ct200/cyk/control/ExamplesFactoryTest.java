@@ -55,8 +55,8 @@ public class ExamplesFactoryTest {
 	public void testGetExamplesList() {
 		List<String> examples = ExamplesFactory.getExamplesList();
 		
-		// Devem existir 6 exemplos
-		assertEquals(6,examples.size());
+		// Devem existir 7 exemplos
+		assertEquals(7,examples.size());
 	}
 
 	/**

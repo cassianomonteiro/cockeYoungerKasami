@@ -110,6 +110,14 @@ public class ExamplesFactory {
 								                             "Z->BS\n" +
 								                             "A->a\n" +
 															 "B->b\n");
+
+			// Source:
+			// http://www.di.ubi.pt/~desousa/2011-2012/TComp/algoCYK.pdf
+			examplesMap.put("Exemplo Universidade da Beira Interior", "S->SF|a\n" +
+			                             					 		  "A->CG|SS|CS\n" +
+			                             					 		  "C->b\n" +
+			                             					 		  "F->AS\n" +
+			                             					 		  "G->CA\n");
 			
 			examplesMap.put("Exemplo Trivial", "S->AS|a\n" +
 											   "A->SA|b");
@@ -127,6 +135,7 @@ public class ExamplesFactory {
 			testStringsMap.put("Exemplo Laboratório", "baaba");
 			testStringsMap.put("Exemplo YouTube", "aaabbb");
 			testStringsMap.put("Exemplo Washington University", "aaabb");
+			testStringsMap.put("Exemplo Universidade da Beira Interior", "abbabbaaaaa");
 			testStringsMap.put("Exemplo Trivial", "abba");
 		}
 	}

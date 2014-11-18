@@ -168,7 +168,7 @@ public class CYKParser {
 					lastTestedStringCYKTable[i][j] += "}";
 				}
 				else if (prodList.size() == 1) {
-					lastTestedStringCYKTable[i][j] = "{" +  prodList.get( 0 ).getHead() + "} ";
+					lastTestedStringCYKTable[i][j] = "{" +  prodList.get( 0 ).getHead() + "}";
 				}
 				else {
 					lastTestedStringCYKTable[i][j] = "{}";

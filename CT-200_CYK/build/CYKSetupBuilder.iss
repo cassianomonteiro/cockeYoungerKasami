@@ -57,7 +57,7 @@ Type: filesandordirs; Name: "{app}\app"
 
 [Files]
 
-; EDM Files
+; CYK app Files
 Source: "{#SourceFilesFolder}\Algoritmo CYK.exe"; DestDir: "{app}"; Flags: ignoreversion      
 Source: "{#SourceFilesFolder}\Algoritmo CYK.ico"; DestDir: "{app}"; Flags: ignoreversion        
 Source: "{#SourceFilesFolder}\app\*"; DestDir: "{app}\app"; Flags: ignoreversion createallsubdirs recursesubdirs   

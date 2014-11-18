@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -131,6 +132,11 @@ public class MainViewController {
 		// Limpar resultados
 		cykTableTextArea.clear();
 		resultLabel.setText("");
+		
+		// Executar a avaliação da string quando é pressionada a tecla ENTER
+		if (!evaluateButton.isDisabled() && event.getCode().equals(KeyCode.ENTER)) {
+			evaluateClicked(null);
+		}
     }
 
     // Ignorados estes warning por causa de algum bug do eclipse
