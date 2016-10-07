@@ -1,4 +1,4 @@
 cockeYoungerKasami
 ==================
 
-Implementação acadêmica do algoritmo CYK em java
+Academic implementation of CYK algorythm in Java.
